@@ -34,24 +34,24 @@ export const Play: React.VFC = () => {
 
   /** 検出結果をconsoleに出力する */
   const OutputData = () => {
+    if (!resultsRef.current) return;
+
     const results = resultsRef.current!;
     console.log(results.multiFaceLandmarks[0]);
     console.log("FACEMESH_LEFT_EYE", FACEMESH_LEFT_EYE);
     console.log("FACEMESH_RIGHT_EYE", FACEMESH_RIGHT_EYE);
     console.log("FACEMESH_LIPS", FACEMESH_LIPS);
+    window.location.hash = "#result";
   };
 
   /** 検出結果（フレーム毎に呼び出される） */
-  const onResults = useCallback(
-    (results: Results) => {
-      // 検出結果の格納
-      resultsRef.current = results;
-      // 描画処理
-      const ctx = canvasRef.current!.getContext("2d")!;
-      draw(ctx, results, datas.bgImage, datas.landmark);
-    },
-    [datas]
-  );
+  const onResults = (results: Results) => {
+    // 検出結果の格納
+    resultsRef.current = results;
+    // 描画処理
+    const ctx = canvasRef.current!.getContext("2d")!;
+    draw(ctx, results, datas.bgImage, datas.landmark);
+  };
 
   useEffect(() => {
     const faceMesh = new FaceMesh({
@@ -72,7 +72,8 @@ export const Play: React.VFC = () => {
     if (webcamRef.current) {
       const camera = new Camera(webcamRef.current.video!, {
         onFrame: async () => {
-          await faceMesh.send({ image: webcamRef.current!.video! });
+          if (webcamRef.current && webcamRef.current.video)
+            await faceMesh.send({ image: webcamRef.current.video });
         },
         width: 1280,
         height: 720
@@ -83,7 +84,7 @@ export const Play: React.VFC = () => {
     return () => {
       faceMesh.close();
     };
-  }, [onResults]);
+  }, []);
 
   return (
     <div className={styles.container}>
