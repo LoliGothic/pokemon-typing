@@ -13,6 +13,7 @@ import {
 import { draw } from "../utils/drawCanvas";
 import ButtonAppBar from "../components/ButtonAppBar";
 import Game from "./Game";
+import BasicButtons2 from "../components/BasicButton2";
 
 export const Play: React.VFC = () => {
   const webcamRef = useRef<Webcam>(null);
@@ -227,6 +228,7 @@ export const Play: React.VFC = () => {
         width={1280}
         height={720}
       />
+      <BasicButtons2 />
     </div>
   );
 };
