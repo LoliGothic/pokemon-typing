@@ -1,8 +1,8 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { App } from "./components/App";
-import { Play } from "./components/Play";
-import { Result } from "./components/Result";
+import { App } from "./pages/App";
+import { Play } from "./pages/Play";
+import { Result } from "./pages/Result";
 
 export const RouterConfig: React.VFC = () => {
   return (
