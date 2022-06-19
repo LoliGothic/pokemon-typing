@@ -12,6 +12,7 @@ import {
 } from "@mediapipe/face_mesh";
 import { draw } from "../utils/drawCanvas";
 import ButtonAppBar from "../components/ButtonAppBar";
+import Game from "./Game";
 
 export const Play: React.VFC = () => {
   const webcamRef = useRef<Webcam>(null);
@@ -20,7 +21,7 @@ export const Play: React.VFC = () => {
 
   // コントローラーの追加
   const datas = useControls({
-    bgImage: false,
+    bgImage: true,
     landmark: {
       min: 0,
       max: 477,
@@ -69,16 +70,16 @@ export const Play: React.VFC = () => {
         maxZ = trueCoordintes[i].z;
       }
     }
-    console.log(
-      "minX, maxX, minY, maxY, minZ, maxZ",
-      minX,
-      maxX,
-      minY,
-      maxY,
-      minZ,
-      maxZ
-    );
-    console.log("scaledCoordinates", scaledCoordinates);
+    // console.log(
+    //   "minX, maxX, minY, maxY, minZ, maxZ",
+    //   minX,
+    //   maxX,
+    //   minY,
+    //   maxY,
+    //   minZ,
+    //   maxZ
+    // );
+    // console.log("scaledCoordinates", scaledCoordinates);
     for (let i = 0; i < trueCoordintes.length; i++) {
       scaledCoordinates[i] = {
         x: (trueCoordintes[i].x - minX) / (maxX - minX),
@@ -123,26 +124,26 @@ export const Play: React.VFC = () => {
     lips_y_avg /= FACEMESH_LIPS.length;
     lips_z_avg /= FACEMESH_LIPS.length;
 
-    console.log("left_eye_avg", {
-      x: left_eye_x_avg,
-      y: left_eye_y_avg,
-      z: left_eye_z_avg
-    });
-    console.log("right_eye_avg", {
-      x: right_eye_x_avg,
-      y: right_eye_y_avg,
-      z: right_eye_z_avg
-    });
-    console.log("eye_avg", {
-      x: (left_eye_x_avg + right_eye_x_avg) / 2,
-      y: (left_eye_y_avg + right_eye_y_avg) / 2,
-      z: (left_eye_z_avg + right_eye_z_avg) / 2
-    });
-    console.log("lips_avg", {
-      x: lips_x_avg,
-      y: lips_y_avg,
-      z: lips_z_avg
-    });
+    // console.log("left_eye_avg", {
+    //   x: left_eye_x_avg,
+    //   y: left_eye_y_avg,
+    //   z: left_eye_z_avg
+    // });
+    // console.log("right_eye_avg", {
+    //   x: right_eye_x_avg,
+    //   y: right_eye_y_avg,
+    //   z: right_eye_z_avg
+    // });
+    // console.log("eye_avg", {
+    //   x: (left_eye_x_avg + right_eye_x_avg) / 2,
+    //   y: (left_eye_y_avg + right_eye_y_avg) / 2,
+    //   z: (left_eye_z_avg + right_eye_z_avg) / 2
+    // });
+    // console.log("lips_avg", {
+    //   x: lips_x_avg,
+    //   y: lips_y_avg,
+    //   z: lips_z_avg
+    // });
     console.log(
       "lips_z_avg - (left_eye_z_avg + right_eye_z_avg) / 2",
       lips_z_avg - (left_eye_z_avg + right_eye_z_avg) / 2
@@ -155,9 +156,9 @@ export const Play: React.VFC = () => {
       console.log("down");
     }
     console.log("FACEMESH_LEFT_EYE", FACEMESH_LEFT_EYE);
-    console.log("FACEMESH_RIGHT_EYE", FACEMESH_RIGHT_EYE);
-    console.log("FACEMESH_LIPS", FACEMESH_LIPS);
-    window.location.hash = "#result";
+    // console.log("FACEMESH_RIGHT_EYE", FACEMESH_RIGHT_EYE);
+    // console.log("FACEMESH_LIPS", FACEMESH_LIPS);
+    // window.location.hash = "#result";
   };
 
   /** 検出結果（フレーム毎に呼び出される） */
@@ -167,6 +168,9 @@ export const Play: React.VFC = () => {
     // 描画処理
     const ctx = canvasRef.current!.getContext("2d")!;
     draw(ctx, results, datas.bgImage, datas.landmark);
+    if (!resultsRef.current) {
+      OutputData();
+    }
   };
 
   useEffect(() => {
@@ -205,6 +209,7 @@ export const Play: React.VFC = () => {
   return (
     <div className={styles.container}>
       {/* capture */}
+      <Game />
       <Webcam
         ref={webcamRef}
         style={{ visibility: "hidden" }}

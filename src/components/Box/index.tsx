@@ -36,12 +36,6 @@ export default function BoxSx() {
                   {/* <Button variant="contained">play</Button> */}
                 </a>
               </li>
-              <li>
-                <a href="#result">
-                  <BasicButtons2 />
-                  {/* <Button variant="contained">Result</Button> */}
-                </a>
-              </li>
             </ul>
           </nav>
         </Grid>
