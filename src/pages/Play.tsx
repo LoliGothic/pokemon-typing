@@ -35,7 +35,123 @@ export const Play: React.VFC = () => {
   /** 検出結果をconsoleに出力する */
   const OutputData = () => {
     const results = resultsRef.current!;
+    console.log("results", results);
+
     console.log(results.multiFaceLandmarks[0]);
+
+    const trueCoordintes = results.multiFaceLandmarks[0];
+    const scaledCoordinates: any = []; // length = 478
+    let minX = 10000;
+    let maxX = -10000;
+    let minY = 10000;
+    let maxY = -10000;
+    let minZ = 10000;
+    let maxZ = -10000;
+    for (let i = 0; i < trueCoordintes.length; i++) {
+      if (minX > trueCoordintes[i].x) {
+        minX = trueCoordintes[i].x;
+      }
+      if (maxX < trueCoordintes[i].x) {
+        maxX = trueCoordintes[i].x;
+      }
+      if (minY > trueCoordintes[i].y) {
+        minY = trueCoordintes[i].y;
+      }
+      if (maxY < trueCoordintes[i].y) {
+        maxY = trueCoordintes[i].y;
+      }
+      if (minZ > trueCoordintes[i].z) {
+        minZ = trueCoordintes[i].z;
+      }
+      if (maxZ < trueCoordintes[i].z) {
+        maxZ = trueCoordintes[i].z;
+      }
+    }
+    console.log(
+      "minX, maxX, minY, maxY, minZ, maxZ",
+      minX,
+      maxX,
+      minY,
+      maxY,
+      minZ,
+      maxZ
+    );
+    console.log("scaledCoordinates", scaledCoordinates);
+    for (let i = 0; i < trueCoordintes.length; i++) {
+      scaledCoordinates[i] = {
+        x: (trueCoordintes[i].x - minX) / (maxX - minX),
+        y: (trueCoordintes[i].y - minY) / (maxY - minY),
+        z: (trueCoordintes[i].z - minZ) / (maxZ - minZ)
+      };
+    }
+
+    let left_eye_x_avg = 0;
+    let left_eye_y_avg = 0;
+    let left_eye_z_avg = 0;
+    for (let i = 0; i < FACEMESH_LEFT_EYE.length; i++) {
+      left_eye_x_avg += scaledCoordinates[i].x;
+      left_eye_y_avg += scaledCoordinates[i].y;
+      left_eye_z_avg += scaledCoordinates[i].z;
+    }
+    left_eye_x_avg /= FACEMESH_LEFT_EYE.length;
+    left_eye_y_avg /= FACEMESH_LEFT_EYE.length;
+    left_eye_z_avg /= FACEMESH_LEFT_EYE.length;
+
+    let right_eye_x_avg = 0;
+    let right_eye_y_avg = 0;
+    let right_eye_z_avg = 0;
+    for (let i = 0; i < FACEMESH_RIGHT_EYE.length; i++) {
+      right_eye_x_avg += scaledCoordinates[i].x;
+      right_eye_y_avg += scaledCoordinates[i].y;
+      right_eye_z_avg += scaledCoordinates[i].z;
+    }
+    right_eye_x_avg /= FACEMESH_RIGHT_EYE.length;
+    right_eye_y_avg /= FACEMESH_RIGHT_EYE.length;
+    right_eye_z_avg /= FACEMESH_RIGHT_EYE.length;
+
+    let lips_x_avg = 0;
+    let lips_y_avg = 0;
+    let lips_z_avg = 0;
+    for (let i = 0; i < FACEMESH_LIPS.length; i++) {
+      lips_x_avg += scaledCoordinates[i].x;
+      lips_y_avg += scaledCoordinates[i].y;
+      lips_z_avg += scaledCoordinates[i].z;
+    }
+    lips_x_avg /= FACEMESH_LIPS.length;
+    lips_y_avg /= FACEMESH_LIPS.length;
+    lips_z_avg /= FACEMESH_LIPS.length;
+
+    console.log("left_eye_avg", {
+      x: left_eye_x_avg,
+      y: left_eye_y_avg,
+      z: left_eye_z_avg
+    });
+    console.log("right_eye_avg", {
+      x: right_eye_x_avg,
+      y: right_eye_y_avg,
+      z: right_eye_z_avg
+    });
+    console.log("eye_avg", {
+      x: (left_eye_x_avg + right_eye_x_avg) / 2,
+      y: (left_eye_y_avg + right_eye_y_avg) / 2,
+      z: (left_eye_z_avg + right_eye_z_avg) / 2
+    });
+    console.log("lips_avg", {
+      x: lips_x_avg,
+      y: lips_y_avg,
+      z: lips_z_avg
+    });
+    console.log(
+      "lips_z_avg - (left_eye_z_avg + right_eye_z_avg) / 2",
+      lips_z_avg - (left_eye_z_avg + right_eye_z_avg) / 2
+    );
+    if (lips_z_avg - (left_eye_z_avg + right_eye_z_avg) / 2 > 0.08) {
+      // 0.010061425867024808 => front
+      // 0.008909345257416134 => down
+      console.log("front");
+    } else {
+      console.log("down");
+    }
     console.log("FACEMESH_LEFT_EYE", FACEMESH_LEFT_EYE);
     console.log("FACEMESH_RIGHT_EYE", FACEMESH_RIGHT_EYE);
     console.log("FACEMESH_LIPS", FACEMESH_LIPS);
