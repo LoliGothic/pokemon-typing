@@ -4,9 +4,12 @@
 	"private": true,
 	"dependencies": {
 		"@emotion/css": "^11.5.0",
+		"@emotion/react": "^11.9.3",
+		"@emotion/styled": "^11.9.3",
 		"@mediapipe/camera_utils": "^0.3.1632432234",
 		"@mediapipe/drawing_utils": "^0.3.1620248257",
 		"@mediapipe/face_mesh": "^0.4.1633559619",
+		"@mui/material": "^5.8.4",
 		"@testing-library/jest-dom": "^5.15.0",
 		"@testing-library/react": "^11.2.7",
 		"@testing-library/user-event": "^12.8.3",

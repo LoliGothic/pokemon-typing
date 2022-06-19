@@ -1,5 +1,6 @@
 import React from "react";
+import Button from "@mui/material/Button";
 
 export const Result: React.VFC = () => {
-	return <h3>Sample Page 1</h3>;
+  return <Button variant="contained">Hello World</Button>;
 };
