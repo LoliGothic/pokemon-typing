@@ -153,7 +153,7 @@ function Game() {
             </Box>
             <Box marginBottom="50px" className={classes.stats}>
                 <Typography>
-                    missType: {missCount} test:{time}
+                    missType: {missCount}
                 </Typography>
             </Box>
         </div>
