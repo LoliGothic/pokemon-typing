@@ -16,23 +16,23 @@ const OutlinedButtons = (): React.ReactElement => {
       justifyContent="center"
       alignItems="center"
     >
-      <Link to="/">
+      <a href="/">
         <Button component="a" variant="outlined">
           <Stack direction="row" spacing={1}>
             <CottageSharpIcon />
             <Typography>ホームに戻る</Typography>
           </Stack>
         </Button>
-      </Link>
+      </a>
 
-      <Link to="/play">
+      <a href="#play">
         <Button component="a" variant="outlined">
           <Stack direction="row" spacing={1}>
             <PlayCircleFilledWhiteSharpIcon />
             <Typography>もう一回</Typography>
           </Stack>
         </Button>
-      </Link>
+      </a>
 
       {/* <Button variant='outlined'>
 				<Stack direction='row' spacing={1}>
