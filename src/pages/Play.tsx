@@ -203,7 +203,6 @@ export const Play: React.VFC = () => {
 
   return (
     <div className={styles.container}>
-      <ButtonAppBar />
       {/* capture */}
       <Webcam
         ref={webcamRef}
