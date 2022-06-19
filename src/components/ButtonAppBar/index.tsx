@@ -24,9 +24,6 @@ const ButtonAppBar = (): React.ReactElement => {
           <FaceSharpIcon />
           <Typography>Eye-Typing</Typography>
         </Stack>
-        <Button color="inherit">
-          <a href=".auth/login/google">login</a>
-        </Button>
       </Toolbar>
     </AppBar>
   );

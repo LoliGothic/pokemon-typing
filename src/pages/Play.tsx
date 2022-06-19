@@ -212,7 +212,7 @@ export const Play: React.VFC = () => {
       <Game />
       <Webcam
         ref={webcamRef}
-        style={{ visibility: "hidden" }}
+        style={{ visibility: "hidden", display: "hidden" }}
         audio={false}
         width={1280}
         height={720}
@@ -236,13 +236,10 @@ export const Play: React.VFC = () => {
 
 const styles = {
   container: css`
-    position: relative;
-    width: 100vw;
-    height: 100vh;
-    overflow: hidden;
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
   `,
   canvas: css`
     position: absolute;
@@ -250,5 +247,6 @@ const styles = {
     height: 720px;
     background-color: #1e1e1e;
     border: 1px solid #fff;
+    margin-top: 32px;
   `
 };
