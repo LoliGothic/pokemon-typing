@@ -1,22 +1,23 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import Button from "@mui/material/Button";
+import ButtonAppBar from "../components/ButtonAppBar";
 
 export const App: React.VFC = () => {
   return (
     <>
+      <ButtonAppBar />
       <h1>Sample Home</h1>
       <nav>
         <ul>
           <li>
-            <Link to="play">
+            <a href="#play">
               <Button variant="contained">Play</Button>
-            </Link>
+            </a>
           </li>
           <li>
-            <Link to="result">
+            <a href="#result">
               <Button variant="contained">Result</Button>
-            </Link>
+            </a>
           </li>
         </ul>
       </nav>
