@@ -10,6 +10,7 @@ npm run build
 // ローカルでテスト
 // npm install -g serve
 // serve -s build
+-------
 // 【Azureの場合】Dockerfileを元にイメージを作成。(-fで本番用Dockerfileを指定し、-tでタグ付け)
 docker build -f Dockerfile.production .  -t crsushitabetai.azurecr.io/sushi-react:v1.2
 docker push crsushitabetai.azurecr.io/sushi-react:v1.2
