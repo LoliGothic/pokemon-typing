@@ -11,9 +11,13 @@ npm run build
 // npm install -g serve
 // serve -s build
 -------
-// 【Azureの場合】Dockerfileを元にイメージを作成。(-fで本番用Dockerfileを指定し、-tでタグ付け)
-docker build -f Dockerfile.production .  -t crsushitabetai.azurecr.io/sushi-react:v1.2
-docker push crsushitabetai.azurecr.io/sushi-react:v1.2
+// 【Azureの場合】
+az login
+az acr login -n コンテナレジストリ名
+// Dockerfileを元にイメージを作成。(-fで本番用Dockerfileを指定し、-tでタグ付け)
+docker build -f Dockerfile.production .  -t コンテナレジストリ名.azurecr.io/sushi-react:v1.0
+docker push コンテナレジストリ名.azurecr.io/sushi-react:v1.2
+// 以降はcontainer appsやinstanceにコンテナレジストリから、選択してデプロイ
 ```
 
 # Getting Started with Create React App
