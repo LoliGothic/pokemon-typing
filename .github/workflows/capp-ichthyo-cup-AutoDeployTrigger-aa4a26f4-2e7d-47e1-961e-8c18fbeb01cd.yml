@@ -7,7 +7,7 @@ on:
     branches: 
       [ main ]
     paths:
-    - 'Dockerfile.production/**'
+    - '**'
     - '.github/workflows/capp-ichthyo-cup-AutoDeployTrigger-aa4a26f4-2e7d-47e1-961e-8c18fbeb01cd.yml'
 
   # Allow mannually trigger 
@@ -36,8 +36,8 @@ jobs:
         with:
           push: true
           tags: crichtyocup.azurecr.io/capp-ichthyo-cup:${{ github.sha }}
-          file: Dockerfile.production/Dockerfile
-          context: Dockerfile.production/
+          file: ./Dockerfile
+          context: ./
 
 
   deploy:
