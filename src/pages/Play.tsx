@@ -228,7 +228,9 @@ export const Play: React.VFC = () => {
         width={1280}
         height={720}
       />
-      <BasicButtons2 />
+      <a href="#result">
+        <BasicButtons2 />
+      </a>
     </div>
   );
 };
