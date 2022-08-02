@@ -9,6 +9,10 @@ on:
     paths:
     - '**'
     - '.github/workflows/capp-ichthyo-cup-AutoDeployTrigger-aa4a26f4-2e7d-47e1-961e-8c18fbeb01cd.yml'
+  pull_request:
+    types: [opened, synchronize, reopened, closed]
+    branches:
+      - main
 
   # Allow mannually trigger 
   workflow_dispatch:      
